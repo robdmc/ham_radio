@@ -1,0 +1,19 @@
+CM 
+CE
+SY height=43	'height of vertical
+SY len=33.9201	'length of radial
+SY rad_h=10	'height of radial start
+GW	1	37	0	0	rad_h	0	0	height	#20	'vertical
+GW	2	37	0	0	rad_h	len	0	rad_h	#20	'right_radial
+GW	3	37	-len	0	rad_h	0	0	rad_h	#20	'left_radial
+GS	0	0	0.3048
+GE	1
+LD	5	1	1	37	58000000
+LD	5	2	1	37	58000000
+LD	5	3	1	37	58000000
+GN	2	0	0	0	13	0.005
+EK
+EX	0	1	1	0	0	0	0
+
+FR	0	0	0	0	7	0
+EN

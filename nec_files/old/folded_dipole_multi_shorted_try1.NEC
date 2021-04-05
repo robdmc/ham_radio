@@ -1,0 +1,54 @@
+CM 
+CE
+SY sep=.2
+SY height=37
+SY len=66.21574
+SY len_forty=67.53378
+SY overhang=.2
+GW	1	99	-len/2 - overhang	0	height	len/2	0	height	#14
+GW	2	99	-len/2	0	height+sep	len/2	0	height+sep	#14
+GW	3	99	-len/2	0	height+2*sep	len/2	0	height+2*sep	#14
+GW	4	99	-len/2	0	height+3*sep	len/2	0	height+3*sep	#14
+GW	5	99	-len/2	0	height+4*sep	len/2	0	height+4*sep	#14
+GW	6	99	-len/2	0	height+5*sep	len/2	0	height+5*sep	#14
+GW	7	99	-len/2	0	height+6*sep	len/2	0	height+6*sep	#14
+GW	8	99	-len/2	0	height+7*sep	len/2	0	height+7*sep	#14
+GW	9	99	-len/2	0	height+8*sep	len/2	0	height+8*sep	#14
+GW	10	99	-len/2 - overhang	0	height+9*sep	len/2	0	height+9*sep	#14
+GW	11	1	len/2	0	height	len/2	0	height+sep	#14
+GW	12	1	len/2	0	height+2*sep	len/2	0	height+3*sep	#14
+GW	13	1	len/2	0	height+4*sep	len/2	0	height+5*sep	#14
+GW	14	1	len/2	0	height+6*sep	len/2	0	height+7*sep	#14
+GW	15	1	len/2	0	height+8*sep	len/2	0	height+9*sep	#14
+GW	16	1	-len/2	0	height+sep	-len/2	0	height+2*sep	#14
+GW	17	1	-len/2	0	height+3*sep	-len/2	0	height+4*sep	#14
+GW	18	1	-len/2	0	height+5*sep	-len/2	0	height+6*sep	#14
+GW	19	1	-len/2	0	height+7*sep	-len/2	0	height+8*sep	#14
+GW	20	9	-len/2 - overhang	0	height	-len/2 - overhang	0	height + 9*sep	#14
+GS	0	0	0.3048
+GE	1
+LD	5	1	1	19	58000000
+LD	5	2	1	19	58000000
+LD	5	3	1	19	58000000
+LD	5	4	1	19	58000000
+LD	5	5	1	19	58000000
+LD	5	6	1	19	58000000
+LD	5	7	1	19	58000000
+LD	5	8	1	19	58000000
+LD	5	9	1	19	58000000
+LD	5	10	1	19	58000000
+LD	5	11	1	19	58000000
+LD	5	12	1	19	58000000
+LD	5	13	1	19	58000000
+LD	5	14	1	19	58000000
+LD	5	15	1	19	58000000
+LD	5	16	1	19	58000000
+LD	5	17	1	19	58000000
+LD	5	18	1	19	58000000
+LD	5	19	1	19	58000000
+LD	5	20	1	9	58000000
+GN	2	0	0	0	13	0.005
+EK
+EX	0	1	50	0	0	0	0
+FR	0	0	0	0	7.1	0
+EN

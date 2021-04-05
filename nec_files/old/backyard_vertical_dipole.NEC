@@ -1,0 +1,13 @@
+CM 
+CE
+SY feed_height=43	'height of vertical
+SY len=33.87052	'length of radial
+GW	1	19	0	0	feed_height-len	0	0	feed_height+len	#20	'vertical
+GS	0	0	0.3048
+GE	1
+LD	5	1	1	19	58000000
+GN	2	0	0	0	17	0.015
+EK
+EX	0	1	10	0	0	0	0
+FR	0	0	0	0	7.1	0
+EN

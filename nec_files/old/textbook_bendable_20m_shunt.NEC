@@ -1,0 +1,27 @@
+CM 
+CE
+SY height=.5
+SY len=.435
+SY nsegs=39
+SY drive_seg=10
+SY alpha=25
+SY shunt_loc=.091
+SY shuntsegs=19
+GW	1	shuntsegs	0	0	height	shunt_loc	0	height	#20
+GW	2	shuntsegs	0	0	height	shunt_loc*cos(alpha)	shunt_loc*sin(alpha)	height	#20
+GW	3	shuntsegs	shunt_loc	0	height	shunt_loc*cos(alpha)	shunt_loc*sin(alpha)	height	#20
+GW	4	nsegs	shunt_loc	0	height	len	0	height	#20
+GW	5	nsegs	shunt_loc*cos(alpha)	shunt_loc*sin(alpha)	height	len * cos(alpha)	len * sin(alpha)	height	#20
+GS	0	0	21.26241
+GE	1
+LD	5	0	1	shuntsegs	58000000
+LD	5	1	1	shuntsegs	58000000
+LD	5	2	1	shuntsegs	58000000
+LD	5	3	1	nsegs	58000000
+LD	5	4	1	nsegs	58000000
+
+GN	2	0	0	0	13	0.005
+EK
+EX	0	3	drive_seg	0	0	0	0
+FR	0	0	0	0	14.1	0
+EN

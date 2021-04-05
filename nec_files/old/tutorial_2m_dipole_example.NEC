@@ -1,0 +1,19 @@
+CM Tutorial example.  this is a comment. 2 meter dipole
+CE
+SY driv_len=1.000512	'length of dipole
+SY refl_space=0.25429	'spacing between reflector and driven
+SY refl_len=0.887124	'reflector length
+SY height=2.5	'center point height
+SY segments=19
+GW	1	segments	0	0	-driv_len/2	0	0	driv_len/2	#4	'driven element
+GW	2	segments	refl_space	0	-refl_len/2	refl_space	0	refl_len/2	#4	'reflector
+GM	0	0	0	0	0	0	0	height	1
+GE	1
+LD	5	1	1	segments	58000000
+LD	5	2	1	segments	58000000
+GN	2	0	0	0	13	0.005
+EK
+EX	0	1	(segments + 1)/2	0	0	0	0
+EX	0	0	10	0	0	0	0
+FR	0	0	0	0	146	0
+EN

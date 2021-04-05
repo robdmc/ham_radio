@@ -1,0 +1,16 @@
+CM 
+CE
+SY left_h=36.7	'mckee
+SY right_h=40.8	'wiley
+SY drop=.2	'drop lengths
+SY left_len=51.76921	'mckee
+SY right_len=51.76921	'wiley
+GW	1	19	-left_len	0	left_h	right_len	0	right_h	#20	'dipole
+GS	0	0	0.3048
+GE	1
+LD	5	1	1	19	58000000
+GN	2	0	0	0	13	0.004
+EK
+EX	0	1	10	0	0	0	0
+FR	0	0	0	0	14.1	0
+EN
