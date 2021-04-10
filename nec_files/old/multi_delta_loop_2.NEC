@@ -1,0 +1,53 @@
+CM 
+CE
+SY l=.638
+SY y=.196
+SY s=.02
+SY f=.02
+SY n_segs=19
+SY f_segs=3
+SY h=.5
+SY r=#14
+GW	1	n_segs	0	0	h + 0 * s	l	y	h + 0 * s	r
+GW	2	n_segs	l	y	h + 0 * s	l	-y	h + 0 * s	r
+GW	3	n_segs	l	-y	h + 0 * s	0	0	h + 1 * s	r
+GW	4	n_segs	0	0	h + 1 * s	l	y	h + 1 * s	r
+GW	5	n_segs	l	y	h + 1 * s	l	-y	h + 1 * s	r
+GW	6	n_segs	l	-y	h + 1 * s	0	0	h + 2 * s	r
+GW	7	n_segs	0	0	h + 2 * s	l	y	h + 2 * s	r
+GW	8	n_segs	l	y	h + 2 * s	l	-y	h + 2 * s	r
+GW	9	n_segs	l	-y	h + 2 * s	0	0	h + 3 * s	r
+GW	10	n_segs	0	0	h + 3 * s	l	y	h + 3 * s	r
+GW	11	n_segs	l	y	h + 3 * s	l	-y	h + 3 * s	r
+GW	12	n_segs	l	-y	h + 3 * s	0	0	h + 4 * s	r
+GW	13	n_segs	0	0	h + 4 * s	l	y	h + 4 * s	r
+GW	14	n_segs	l	y	h + 4 * s	l	-y	h + 4 * s	r
+GW	15	n_segs	l	-y	h + 4 * s	0	0	h + 5 * s	r
+GW	16	f_segs	-f	0	h	-f	0	h + 5 * s	r
+GW	17	1	-f	0	h	0	0	h	r
+GW	18	1	-f	0	h + 5*s	0	0	h+5*s	r
+GS	0	0	21.26241
+GE	1
+LD	5	1	1	n_segs	58000000
+LD	5	2	1	n_segs	58000000
+LD	5	3	1	n_segs	58000000
+LD	5	4	1	n_segs	58000000
+LD	5	5	1	n_segs	58000000
+LD	5	6	1	n_segs	58000000
+LD	5	7	1	n_segs	58000000
+LD	5	8	1	n_segs	58000000
+LD	5	9	1	n_segs	58000000
+LD	5	10	1	n_segs	58000000
+LD	5	11	1	n_segs	58000000
+LD	5	12	1	n_segs	58000000
+LD	5	13	1	n_segs	58000000
+LD	5	14	1	n_segs	58000000
+LD	5	15	1	n_segs	58000000
+LD	5	16	1	f_segs	58000000
+LD	5	17	1	1	58000000
+LD	5	18	1	1	58000000
+GN	2	0	0	0	13	0.005
+EK
+EX	0	16	2	0	0	0	0
+FR	0	0	0	0	14.1	0
+EN
