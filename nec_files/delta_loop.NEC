@@ -1,0 +1,23 @@
+CM 
+CE
+SY l= 45.09977034
+SY y=21.93604331
+SY s= 0.65616798
+SY n_segs=29
+SY h= 37.40456037
+SY r=#14
+GW	1	n_segs	0	0	h + 0 * s	l	y	h + 0 * s	r
+GW	2	n_segs	l	y	h + 0 * s	l	-y	h + 0 * s	r
+GW	3	n_segs	l	-y	h + 0 * s	0	0	h + 1 * s	r
+GW	4	1	0	0	h	0	0	h + 1 * s	r
+GS	0	0	0.3048
+GE	1
+LD	5	1	1	n_segs	58000000
+LD	5	2	1	n_segs	58000000
+LD	5	3	1	n_segs	58000000
+LD	5	4	1	1	58000000
+GN	2	0	0	0	13	0.005
+EK
+EX	0	4	1	0	0	0	0
+FR	0	0	0	0	14.1	0
+EN
