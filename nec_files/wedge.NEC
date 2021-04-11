@@ -1,0 +1,56 @@
+CM 
+CE
+SY height=.5
+SY delta=.083
+SY n_segs=10
+SY x=4.938365
+SY sep=.001	'.
+GW	1	n_segs	0	sep	height	delta	sep + delta ^ x	height	#14
+GW	2	n_segs	delta	sep + delta^x	height	2 * delta	sep + (2 * delta)^x	height	#14
+GW	3	n_segs	2 * delta	sep + (2 * delta)^x	height	3 * delta	sep + ( 3 * delta)^x	height	#14
+GW	4	n_segs	3 * delta	sep + (3 * delta)^x	height	4 * delta	sep + ( 4 * delta)^x	height	#14
+GW	5	n_segs	4 * delta	sep + (4 * delta)^x	height	5 * delta	sep + ( 5 * delta)^x	height	#14
+GW	6	n_segs	5 * delta	sep + (5 * delta)^x	height	6 * delta	sep + ( 6 * delta)^x	height	#14
+GW	7	n_segs	6 * delta	sep + (6 * delta)^x	height	7 * delta	sep + ( 7 * delta)^x	height	#14
+GW	8	n_segs	7 * delta	sep + (7 * delta)^x	height	8 * delta	sep + ( 8 * delta)^x	height	#14
+GW	9	n_segs	8 * delta	sep + (8 * delta)^x	height	9 * delta	sep + ( 9 * delta)^x	height	#14
+GW	10	n_segs	9 * delta	sep + (9 * delta)^x	height	10 * delta	sep + ( 10 * delta)^x	height	#14
+GW	11	n_segs	0	-sep	height	delta	-sep + -delta ^ x	height	#14
+GW	12	n_segs	delta	-sep - delta^x	height	2 * delta	-sep + -(2 * delta)^x	height	#14
+GW	13	n_segs	2 * delta	-sep - (2 * delta)^x	height	3 * delta	-sep -( 3 * delta)^x	height	#14
+GW	14	n_segs	3 * delta	-sep - (3 * delta)^x	height	4 * delta	-sep -( 4 * delta)^x	height	#14
+GW	15	n_segs	4 * delta	-sep - (4 * delta)^x	height	5 * delta	-sep -( 5 * delta)^x	height	#14
+GW	16	n_segs	5 * delta	-sep - (5 * delta)^x	height	6 * delta	-sep -( 6 * delta)^x	height	#14
+GW	17	n_segs	6 * delta	-sep - (6 * delta)^x	height	7 * delta	-sep -( 7 * delta)^x	height	#14
+GW	18	n_segs	7 * delta	-sep - (7 * delta)^x	height	8 * delta	-sep -( 8 * delta)^x	height	#14
+GW	19	n_segs	8 * delta	-sep - (8 * delta)^x	height	9 * delta	-sep -( 9 * delta)^x	height	#14
+GW	20	n_segs	9 * delta	-sep - (9 * delta)^x	height	10 * delta	-sep -( 10 * delta)^x	height	#14
+GW	21	1	0	-sep	height	0	sep	height	#14
+GS	0	0	21.26241
+GE	1
+LD	5	1	1	n_segs	58000000
+LD	5	2	1	n_segs	58000000
+LD	5	3	1	n_segs	58000000
+LD	5	4	1	n_segs	58000000
+LD	5	5	1	n_segs	58000000
+LD	5	6	1	n_segs	58000000
+LD	5	7	1	n_segs	58000000
+LD	5	8	1	n_segs	58000000
+LD	5	9	1	n_segs	58000000
+LD	5	10	1	n_segs	58000000
+LD	5	11	1	n_segs	58000000
+LD	5	12	1	n_segs	58000000
+LD	5	13	1	n_segs	58000000
+LD	5	14	1	n_segs	58000000
+LD	5	15	1	n_segs	58000000
+LD	5	16	1	n_segs	58000000
+LD	5	17	1	n_segs	58000000
+LD	5	18	1	n_segs	58000000
+LD	5	19	1	n_segs	58000000
+LD	5	20	1	n_segs	58000000
+LD	5	21	1	1	58000000
+GN	2	0	0	0	13	0.005
+EK
+EX	0	21	1	0	0	0	0
+FR	0	0	0	0	14.1	0
+EN

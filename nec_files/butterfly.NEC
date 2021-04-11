@@ -1,0 +1,30 @@
+CM 
+CE
+SY height=.5
+SY len=.175
+SY n_segs=39
+SY drive_seg=1
+SY alpha=25
+SY shunt_len=.001
+SY shunt_segs=1
+SY sep=.001	'.
+GW	1	shunt_segs	-shunt_len/2	sep/2	height	shunt_len/2	sep/2	height	#14
+GW	2	shunt_segs	-shunt_len/2	-sep/2	height	shunt_len/2	-sep/2	height	#14
+GW	3	n_segs	-shunt_len/2	-sep/2	height	-shunt_len/2 - len*cos(alpha)	-sep/2 - len * sin(alpha)	height	#14
+GW	4	n_segs	shunt_len/2	-sep/2	height	shunt_len/2 + len *cos(alpha)	-sep/2 - len * sin(alpha)	height	#14
+GW	5	n_segs	-shunt_len/2	sep/2	height	-shunt_len/2 - len * cos(alpha)	sep/2 + len * sin(alpha)	height	#14
+GW	6	n_segs	shunt_len/2	sep/2	height	shunt_len/2 + len * cos(alpha)	sep/2 + len * sin(alpha)	height	#14
+GS	0	0	21.26241
+GE	1
+LD	5	1	1	shunt_segs	58000000
+LD	5	2	1	shunt_segs	58000000
+LD	5	3	1	n_segs	58000000
+LD	5	4	1	n_segs	58000000
+LD	5	5	1	n_segs	58000000
+LD	5	6	1	n_segs	58000000
+GN	2	0	0	0	13	0.005
+EK
+EX	0	1	1	0	0	0	0	0
+
+FR	0	0	0	0	14.1	0
+EN

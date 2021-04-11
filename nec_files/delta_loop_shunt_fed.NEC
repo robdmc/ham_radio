@@ -1,0 +1,28 @@
+CM 
+CE
+SY lam=69.75
+SY theta=26.45
+SY x = lam * cos(theta) / (1 + sin(theta))
+SY y = lam * sin(theta) / (1 + sin(theta))
+SY r=#14
+SY n_segs=59
+SY drive_seg=1
+SY h=lam/2
+SY f=.005
+SY s = lam * f
+SY shunt_segs=1
+GW	1	n_segs	s * cos(theta)	s * sin(theta)	h	x	y	h	r
+GW	2	n_segs	s * cos(theta)	-s * sin(theta)	h	x	-y	h	r
+GW	3	n_segs	x	-y	h	x	y	h	r
+GW	4	shunt_segs	s * cos(theta)	s * sin(theta)	h	s*cos(theta)	-s * sin(theta)	h	r
+GS	0	0	0.3048
+GE	1
+LD	5	1	1	n_segs	58000000
+LD	5	2	1	n_segs	58000000
+LD	5	3	1	n_segs	58000000
+LD	5	4	1	shunt_segs	58000000
+GN	2	0	0	0	13	0.005
+EK
+EX	0	4	drive_seg	0	0	0	0
+FR	0	0	0	0	14.1	0
+EN

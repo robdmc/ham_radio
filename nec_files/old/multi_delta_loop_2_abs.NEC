@@ -1,12 +1,12 @@
 CM 
 CE
-SY l=14.06987
-SY y=4.232442
-SY s=0.420684
+SY l=5
+SY y=1
+SY s=0.2
 SY f=.425
 SY n_segs=19
 SY f_segs=3
-SY h=11.40091
+SY h=3
 SY r=#14
 GW	1	n_segs	0	0	h + 0 * s	l	y	h + 0 * s	r
 GW	2	n_segs	l	y	h + 0 * s	l	-y	h + 0 * s	r

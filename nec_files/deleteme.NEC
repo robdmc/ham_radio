@@ -7,7 +7,7 @@ SY y = lam * sin(theta) / (1 + sin(theta))
 SY r=#14
 SY n_segs=19
 SY drive_seg=10
-SY h_frac=.5
+SY h_frac=.13
 SY h=h_frac*lam
 GW	1	n_segs	0	0	h	x	y	h	r
 GW	2	n_segs	0	0	h	x	-y	h	r
