@@ -1,27 +1,27 @@
 CM 
 CE
-SY lam=69.75
+SY lam=138.5
 SY theta=30
 SY x = lam * cos(theta) / (1 + sin(theta))
 SY y = lam * sin(theta) / (1 + sin(theta))
 SY r=#14
-SY n_segs=19
-SY drive_seg=10
+SY n_segs=59
+SY drive_seg=1
 SY h_frac=.5
-SY h=h_frac*lam
-GW	1	n_segs	0	0	h	x	y	h	r
-GW	2	n_segs	0	0	h	x	-y	h	r
+SY h=35
+SY sep=.125
+GW	1	n_segs	0	sep	h	x	y	h	r
+GW	2	n_segs	0	-sep	h	x	-y	h	r
 GW	3	n_segs	x	-y	h	x	y	h	r
+GW	4	1	0	-sep	h	0	sep	h	r
 GS	0	0	0.3048
 GE	1
 LD	5	1	1	n_segs	58000000
 LD	5	2	1	n_segs	58000000
 LD	5	3	1	n_segs	58000000
+LD	5	4	1	1	58000000
 GN	2	0	0	0	13	0.005
 EK
-EX	0	3	drive_seg	0	1	0	0
-EX	0	1	15	0	1	0	0
-EX	0	3	15	0	1	0	0
-
-FR	0	0	0	0	14.1	0
+EX	0	4	drive_seg	0	0	0	0
+FR	0	0	0	0	7.1	0
 EN
