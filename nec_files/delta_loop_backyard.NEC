@@ -8,7 +8,7 @@ SY r=#14
 SY n_segs=59
 SY drive_seg=1
 SY h_frac=.5
-SY h=35
+SY h=lam*h_frac
 SY sep=.125
 GW	1	n_segs	0	sep	h	x	y	h	r
 GW	2	n_segs	0	-sep	h	x	-y	h	r
