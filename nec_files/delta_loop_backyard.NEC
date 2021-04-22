@@ -1,7 +1,7 @@
 CM 
 CE
 SY lam=70.45
-SY theta=30
+SY theta=26
 SY x = lam * cos(theta) / (1 + sin(theta))
 SY y = lam * sin(theta) / (1 + sin(theta))
 SY r=#14

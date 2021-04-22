@@ -1,0 +1,18 @@
+CM 
+CE
+SY height=.5
+SY len=.375
+SY nsegs=39
+SY drive_seg=39
+SY alpha=130
+GW	0	nsegs	-len	0	height	0	0	height	#14
+GW	1	nsegs	0	0	height	len*cos(alpha)	len*sin(alpha)	height	#14
+GS	0	0	21.26241
+GE	-1
+LD	5	0	1	19	58000000
+LD	5	1	1	19	58000000
+GN	2	0	0	0	13	0.005
+EK
+EX	0	0	drive_seg	0	0	0	0
+FR	0	0	0	0	14.1	0
+EN
