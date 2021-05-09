@@ -17,7 +17,6 @@ http://www.physics.otago.ac.nz/research/electronics/nec/index.html
 
 
 from numpy import *
-from lwa_user.mathutil import regrid
 import os
 import re
 import logging
@@ -88,24 +87,6 @@ def change_nec_freq(necname, freq):
     f.truncate()
     f.close()
 
-def calcIME(necname, myfreqs = None, zpre = 100):
-    '''Compute the impedance mismatch efficiency (IME),
-    for a given NEC run and write out the results in a file.
-    Assumes a default preamplifier input impedance of 100 ohms,
-    unless overridden by the zpre keyword argument.
-    Returns the frequencies calculated by NEC, unless
-    myfreqs is set, in which case it interpolates onto that
-    frequency grid.'''
-    ant = NECImpedance(necname)
-    gamma = (zpre - ant.z)/(zpre + ant.z)
-    ime = (1 - abs(gamma)**2)
-    if myfreqs is None:
-        return (ant.freqs, ime)
-    else:
-        newime = regrid(ant.freqs, ime, myfreqs, method = 'linear')
-        return (myfreqs, newime)
-
-#    
 #
 class NECImpedance:
     '''NECImpedance:
