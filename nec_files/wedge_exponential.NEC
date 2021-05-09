@@ -1,12 +1,11 @@
 CM 
 CE
 SY height=.5
-SY delta=.083
+SY delta=.05
 SY n_segs=10
-SY x=4.938365
 SY sep=.001	'.
 SY e=2.7183
-SY lamb=.2
+SY lamb=.08
 GW	1	n_segs	0 * delta	sep * e^(0 * delta / lamb)	height	1 * delta	sep * e^(1*delta/lamb)	height	#14
 GW	2	n_segs	1 * delta	sep * e^(1 * delta / lamb)	height	2 * delta	sep * e^(2*delta/lamb)	height	#14
 GW	3	n_segs	2 * delta	sep * e^(2 * delta / lamb)	height	3 * delta	sep * e^(3*delta/lamb)	height	#14
