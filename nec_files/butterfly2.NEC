@@ -1,10 +1,10 @@
 CM 
 CE
 SY height=.5
-SY len=.25
+SY len=.3725
 SY n_segs=39
 SY drive_seg=1
-SY alpha=25
+SY alpha=45
 SY shunt_len=.01
 SY shunt_segs=1
 SY sep=.01	'.
