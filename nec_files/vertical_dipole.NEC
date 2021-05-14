@@ -1,6 +1,6 @@
 CM 
 CE
-SY c=.27
+SY c=.2
 SY f=0.120381
 SY sep1=.018
 SY sep2=.018
@@ -14,7 +14,7 @@ GW	2	1	0	0	c-l	sep1	0	c-l	#14
 GW	3	1	0	0	c+l	sep2	sepy	c+l	#14
 GW	4	fsegs	sep2	sepy	c+l	sep2	sepy	c+l-f	#14
 GW	5	fsegs	sep1	0	c-l	sep1	0	c-l+f	#14
-GS	0	0	42.22535
+GS	0	0	21.26241
 GE	1
 GN	2	0	0	0	13	0.005
 EK
