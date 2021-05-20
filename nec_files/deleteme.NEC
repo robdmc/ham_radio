@@ -1,23 +1,24 @@
 CM 
 CE
-SY c=.27
-SY f=0.120381
-SY sep1=.018
-SY sep2=.018
-SY sepy=0
-SY tot=0.292024
-SY l = tot - f - sep1
-SY lsegs=19
-SY fsegs=9	'top=.35*lam, bott=.0464*lam
-GW	1	lsegs	0	0	c - l	0	0	c + l	#14
-GW	2	1	0	0	c-l	sep1	0	c-l	#14
-GW	3	1	0	0	c+l	sep2	sepy	c+l	#14
-GW	4	fsegs	sep2	sepy	c+l	sep2	sepy	c+l-f	#14
-GW	5	fsegs	sep1	0	c-l	sep1	0	c-l+f	#14
-GS	0	0	42.22535
+SY lam=70.4*1.5
+SY theta=30
+SY x = lam * cos(theta) / (1 + sin(theta))
+SY y = lam * sin(theta) / (1 + sin(theta))
+SY r=#14
+SY n_segs=19
+SY drive_seg=10
+SY h_frac=.75
+SY h=h_frac*lam
+GW	1	n_segs	0	0	h	x	y	h	r
+GW	2	n_segs	0	0	h	x	-y	h	r
+GW	3	n_segs	x	-y	h	x	y	h	r
+GS	0	0	0.3048
 GE	1
+LD	5	1	1	n_segs	58000000
+LD	5	2	1	n_segs	58000000
+LD	5	3	1	n_segs	58000000
 GN	2	0	0	0	13	0.005
 EK
-EX	0	1	10	0	0	0	0
-FR	0	0	0	0	7.1	0
+EX	0	3	drive_seg	0	0	0	0
+FR	0	0	0	0	14.1	0
 EN
