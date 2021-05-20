@@ -11,9 +11,20 @@ SY x2=s+l*cos(theta)
 SY y2=l*sin(theta)
 SY x3=s+l*cos(theta)
 SY y3=-l*sin(theta)
-SY phi=90
+SY phi=120
 SY xx1 = x1 * cos(phi) - y1 * sin(phi)
 SY yy1 = x1 * sin(phi) + y1 * cos(phi)
+SY xx2 = x2 * cos(phi) - y2 * sin(phi)
+SY yy2 = x2 * sin(phi) + y2 * cos(phi)
+SY xx3 = x3 * cos(phi) - y3 * sin(phi)
+SY yy3 = x3 * sin(phi) + y3 * cos(phi)
+SY phiphi=240
+SY xxx1 = x1 * cos(phiphi) - y1 * sin(phiphi)
+SY yyy1 = x1 * sin(phiphi) + y1 * cos(phiphi)
+SY xxx2 = x2 * cos(phiphi) - y2 * sin(phiphi)
+SY yyy2 = x2 * sin(phiphi) + y2 * cos(phiphi)
+SY xxx3 = x3 * cos(phiphi) - y3 * sin(phiphi)
+SY yyy3 = x3 * sin(phiphi) + y3 * cos(phiphi)
 SY h=.5*lambda
 SY nsegs=39
 GW	1	nsegs	x1	y1	h	x2	y2	h	#14
@@ -22,12 +33,14 @@ GW	3	nsegs	x3	y3	h	x1	y1	h	#14
 GW	4	nsegs	xx1	yy1	h	xx2	yy2	h	#14
 GW	5	nsegs	xx2	yy2	h	xx3	yy3	h	#14
 GW	6	nsegs	xx3	yy3	h	xx1	yy1	h	#14
+GW	7	nsegs	xxx1	yyy1	h	xxx2	yyy2	h	#14
+GW	8	nsegs	xxx2	yyy2	h	xxx3	yyy3	h	#14
+GW	9	nsegs	xxx3	yyy3	h	xxx1	yyy1	h	#14
 GE	1
 GN	2	0	0	0	13	0.005
 EK
-EX	0	1	1	0	0
-EX	0	4	1	0	0
-
-
+EX	0	1	1	0	0	0	0
+EX	0	4	1	0	0	0	0
+EX	0	7	1	0	0	0	0
 FR	0	0	0	0	21	0
 EN
