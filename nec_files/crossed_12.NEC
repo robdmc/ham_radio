@@ -3,7 +3,7 @@ CE
 SY lambda=14.28
 SY l=2*lambda
 SY theta=30
-SY s=.01*lambda
+SY s=0
 SY x1=s
 SY y1=0
 SY x2=s+l*cos(theta)
@@ -11,13 +11,28 @@ SY y2=l*sin(theta)
 SY x3=s+l*cos(theta)
 SY y3=-l*sin(theta)
 SY h=(18/15)*lambda
+SY hh = h + .1 * lambda
 SY nsegs=39
+SY fx=1/(2 * sin(60))
+SY fy=1/(2*sin(60))
+SY dx=fx*l
+SY dy=-fy* l
+SY xx1=dx
+SY yy1=dy
+SY xx2=dx - l * sin(theta)
+SY yy2=dy + l * cos(theta)
+SY xx3=dx + l * sin(theta)
+SY yy3=dy + l * cos(theta)
 GW	1	nsegs	x1	y1	h	x2	y2	h	#14
 GW	2	nsegs	x2	y2	h	x3	y3	h	#14
 GW	3	nsegs	x3	y3	h	x1	y1	h	#14
+GW	4	nsegs	xx1	yy1	hh	xx2	yy2	hh	#14
+GW	5	nsegs	xx2	yy2	hh	xx3	yy3	hh	#14
+GW	6	nsegs	xx3	yy3	hh	xx1	yy1	hh	#14
 GE	1
 GN	2	0	0	0	13	0.005
 EK
-EX	0	1	1	0	0
+EX	0	1	1	0	100	0	0	0
+EX	0	4	1	0	100	0	0
 FR	0	0	0	0	21	0
 EN
