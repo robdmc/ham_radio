@@ -20,75 +20,10 @@ SY x3 = r * cos(3 * phi) * a ^ (3 / 4)
 SY y3 = r * sin(3 * phi) * a ^ (3 / 4)
 SY x4 = r * cos(4 * phi) * a ^ (4 / 4)
 SY y4 = r * sin(4 * phi) * a ^ (4 / 4)
-SY x5 = r * cos(5 * phi) * a ^ (5 / 4)
-SY y5 = r * sin(5 * phi) * a ^ (5 / 4)
-SY x6 = r * cos(6 * phi) * a ^ (6 / 4)
-SY y6 = r * sin(6 * phi) * a ^ (6 / 4)
-SY x7 = r * cos(7 * phi) * a ^ (7 / 4)
-SY y7 = r * sin(7 * phi) * a ^ (7 / 4)
-SY x8 = r * cos(8 * phi) * a ^ (8 / 4)
-SY y8 = r * sin(8 * phi) * a ^ (8 / 4)
-SY x9 = r * cos(9 * phi) * a ^ (9 / 4)
-SY y9 = r * sin(9 * phi) * a ^ (9 / 4)
-SY x10 = r * cos(10 * phi) * a ^ (10 / 4)
-SY y10 = r * sin(10 * phi) * a ^ (10 / 4)
-SY x11 = r * cos(11 * phi) * a ^ (11 / 4)
-SY y11 = r * sin(11 * phi) * a ^ (11 / 4)
-SY x12 = r * cos(12 * phi) * a ^ (12 / 4)
-SY y12 = r * sin(12 * phi) * a ^ (12 / 4)
-SY x13 = r * cos(13 * phi) * a ^ (13 / 4)
-SY y13 = r * sin(13 * phi) * a ^ (13 / 4)
-SY x14 = r * cos(14 * phi) * a ^ (14 / 4)
-SY y14 = r * sin(14 * phi) * a ^ (14 / 4)
-SY x15 = r * cos(15 * phi) * a ^ (15 / 4)
-SY y15 = r * sin(15 * phi) * a ^ (15 / 4)
-SY xx0 = -x0
-SY yy0 = -y0
-SY xx1 = -x1
-SY yy1 = -y1
-SY xx2 = -x2
-SY yy2 = -y2
-SY xx3 = -x3
-SY yy3 = -y3
-SY xx4 = -x4
-SY yy4 = -y4
-SY xx5 = -x5
-SY yy5 = -y5
-SY xx6 = -x6
-SY yy6 = -y6
-SY xx7 = -x7
-SY yy7 = -y7
-SY xx8 = -x8
-SY yy8 = -y8
-SY xx9 = -x9
-SY yy9 = -y9
-SY xx10 = -x10
-SY yy10 = -y10
-SY xx11 = -x11
-SY yy11 = -y11
-SY xx12 = -x12
-SY yy12 = -y12
-SY xx13 = -x13
-SY yy13 = -y13
-SY xx14 = -x14
-SY yy14 = -y14
-SY xx15 = -x15
-SY yy15 = -y15
 GW	1	nsegs	x1	y1	h	x2	y2	h	#14
 GW	2	nsegs	x2	y2	h	x3	y3	h	#14
 GW	3	nsegs	x3	y3	h	x4	y4	h	#14
-GW	4	nsegs	x4	y4	h	x5	y5	h	#14
-GW	5	nsegs	x5	y5	h	x6	y6	h	#14
-GW	6	nsegs	x6	y6	h	x7	y7	h	#14
-GW	7	nsegs	x7	y7	h	x8	y8	h	#14
-GW	8	nsegs	x8	y8	h	x9	y9	h	#14
-GW	9	nsegs	x9	y9	h	x10	y10	h	#14
-GW	10	nsegs	x10	y10	h	x11	y11	h	#14
-GW	11	nsegs	x11	y11	h	x12	y12	h	#14
-GW	12	nsegs	x12	y12	h	x13	y13	h	#14
-GW	13	nsegs	x13	y13	h	x14	y14	h	#14
-GW	14	nsegs	x14	y14	h	x15	y15	h	#14
-GW	15	nsegs	x15	y15	h	x1	y1	h	#14
+GW	4	nsegs	x4	y4	h	x1	y1	h	#14
 GS	0	0	0.3048
 GE	1
 GN	2	0	0	0	13	0.005

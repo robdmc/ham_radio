@@ -1,15 +1,16 @@
 CM 
 CE
 SY lam = 70.45
-SY nsegs = 11
-SY l = 1 * lam
+SY nsegs = 21
+SY nsegs2 = 9
+SY l = lam / 20
 SY n = 16
 SY a = 1.02
-SY f=.5
-SY h = f * lam
-SY dh = .2 * lam
+SY f=.26
+SY h = .1
+SY dh = .5
 SY r = l / (a ^ (n / 2) * (1 + 1 / a ^ .5))
-SY phi = 180
+SY phi = 90
 SY x0 = r * cos(0 * phi) * a ^ (0 / 4)
 SY y0 = r * sin(0 * phi) * a ^ (0 / 4)
 SY x1 = r * cos(1 * phi) * a ^ (1 / 4)
@@ -88,10 +89,27 @@ GW	11	nsegs	x11	y11	h	x12	y12	h	#14
 GW	12	nsegs	x12	y12	h	x13	y13	h	#14
 GW	13	nsegs	x13	y13	h	x14	y14	h	#14
 GW	14	nsegs	x14	y14	h	x15	y15	h	#14
-GW	15	nsegs	x15	y15	h	x1	y1	h	#14
+GW	16	nsegs	xx1	yy1	h + dh	xx2	yy2	h + dh	#14
+GW	17	nsegs	xx2	yy2	h + dh	xx3	yy3	h + dh	#14
+GW	18	nsegs	xx3	yy3	h + dh	xx4	yy4	h + dh	#14
+GW	19	nsegs	xx4	yy4	h + dh	xx5	yy5	h + dh	#14
+GW	20	nsegs	xx5	yy5	h + dh	xx6	yy6	h + dh	#14
+GW	21	nsegs	xx6	yy6	h + dh	xx7	yy7	h + dh	#14
+GW	22	nsegs	xx7	yy7	h + dh	xx8	yy8	h + dh	#14
+GW	23	nsegs	xx8	yy8	h + dh	xx9	yy9	h + dh	#14
+GW	24	nsegs	xx9	yy9	h + dh	xx10	yy10	h + dh	#14
+GW	25	nsegs	xx10	yy10	h + dh	xx11	yy11	h + dh	#14
+GW	26	nsegs	xx11	yy11	h + dh	xx12	yy12	h + dh	#14
+GW	27	nsegs	xx12	yy12	h + dh	xx13	yy13	h + dh	#14
+GW	28	nsegs	xx13	yy13	h + dh	xx14	yy14	h + dh	#14
+GW	29	nsegs	xx14	yy14	h + dh	xx15	yy15	h + dh	#14
+GW	31	nsegs2	x1	y1	h	0	.5	h + dh/2	#14
+GW	32	nsegs2	0	.5	h + dh / 2	xx1	yy1	h + dh	#14
+GW	33	3 * nsegs	0	.5	h + dh / 2	0	.5	h + dh / 2 + lam / 4	#14
 GS	0	0	0.3048
 GE	1
 GN	2	0	0	0	13	0.005
 EK
+EX	0	33	1	0	0	0	0
 FR	0	0	0	0	14.1	0
 EN
