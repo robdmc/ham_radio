@@ -7,219 +7,66 @@ import sys
 import getopt
 import struct
 import click
-
-out = sys.stdout
-
-
-# def output(s):
-#     global out
-#     out.write(s)
-#     out.write(os.linesep)
-
-
-# def parse_planar_cut(descr, unit, data):
-#     output('planar cut: %s' % descr)
-#     (
-#         title_len,
-#         env_len,
-#         notes_len,
-#         frequency,
-#         plane,
-#         plane_angle,
-#         symmetry,
-#         number_of_points,
-#         first_angle,
-#         angular_increment
-#     ) = struct.unpack('<BBHfBfBHff', data[0:24])
-#     data = data[24:]
-#     points = struct.unpack('f' * number_of_points, data[0:4 * number_of_points])
-#     data = data[4 * number_of_points:]
-#     title = data[0:title_len]
-#     data = data[title_len:]
-#     env = data[0:env_len]
-#     data = data[env_len:]
-#     notes = data[0:notes_len]
-#     data = data[notes_len:]
-#     output('  data len=%d' % len(data))
-#     output('  title_len=%d' % title_len)
-#     output('  env_len=%d' % env_len)
-#     output('  notes_len=%d' % notes_len)
-#     output('  frequency=%f' % frequency)
-#     output('  plane=%d' % plane)
-#     output('  plane_angle=%d' % plane_angle)
-#     output('  symmetry=%d' % symmetry)
-#     output('  number_of_points=%d' % number_of_points)
-#     output('  first_angle=%f' % first_angle)
-#     output('  angular_increment=%f' % angular_increment)
-#     output('  points len=%d' % len(points))
-#     output('  unit:%s' % unit)
-#     output('  points:%s' % ', '.join(['%f' % p for p in points]))
-#     output('  title=|%s|' % title)
-#     output('  env=|%s|' % env)
-#     output('  notes=|%s|' % notes)
-#     output('  remaining data len=%d' % len(data))
-
-
-# def parse_absolute_field(descr, unit, data):
-#     output('absolute field: %s' % descr)
-
-
-# BLOCK_TYPES = {
-#     0: ['No-Op', '', None],
-#     1: ['Total magnitude', 'dBi', parse_planar_cut],
-#     2: ['Horizontal magnitude', 'dBi', parse_planar_cut],
-#     3: ['Vertical magnitude', 'dBi', parse_planar_cut],
-#     4: ['Right-circular magnitude', 'dBic', parse_planar_cut],
-#     5: ['Left-circular magnitude', 'dBic', parse_planar_cut],
-#     6: ['Major-axis magnitude', 'dBi', parse_planar_cut],
-#     7: ['Minor-axis magnitude', 'dBi', parse_planar_cut],
-#     8: ['Ellipticity', 'dB', parse_planar_cut],
-#     9: ['Total phase', 'degrees', parse_planar_cut],
-#     10: ['Horizontal phase', 'degrees', parse_planar_cut],
-#     11: ['Vertical phase', 'degrees', parse_planar_cut],
-#     12: ['Right-circular phase', 'degrees', parse_planar_cut],
-#     13: ['Left-circular phase', 'degrees', parse_planar_cut],
-#     14: ['Major-axis phase', 'degrees', parse_planar_cut],
-#     15: ['Minor-axis phase', 'degrees', parse_planar_cut],
-#     16: ['Polarization tilt', 'degrees', parse_planar_cut],
-
-#     64: ['Power density', 'watts/square-meter', parse_absolute_field],
-#     65: ['Peak E magnitude', 'volts/meter', parse_absolute_field],
-#     66: ['Peak H magnitude', 'amps/meter', parse_absolute_field],
-#     67: ['Px Poynting vector', 'watts/square-meter', parse_absolute_field],
-#     68: ['Py Poynting vector', 'watts/square-meter', parse_absolute_field],
-#     69: ['Pz Poynting vector', 'watts/square-meter', parse_absolute_field],
-#     70: ['Ex magnitude', 'volts/meter', parse_absolute_field],
-#     71: ['Ey magnitude', 'volts/meter', parse_absolute_field],
-#     72: ['Ez magnitude', 'volts/meter', parse_absolute_field],
-#     73: ['Hx magnitude', 'amps/meter', parse_absolute_field],
-#     74: ['Hy magnitude', 'amps/meter', parse_absolute_field],
-#     75: ['Hz magnitude', 'amps/meter', parse_absolute_field],
-#     76: ['Ex phase', 'degrees', parse_absolute_field],
-#     77: ['Ey phase', 'degrees', parse_absolute_field],
-#     78: ['Ez phase', 'degrees', parse_absolute_field],
-#     79: ['Hx phase', 'degrees', parse_absolute_field],
-#     80: ['Hy phase', 'degrees', parse_absolute_field],
-#     81: ['Hz phase', 'degrees', parse_absolute_field],
-#     96: ['E(R) magnitude', 'volts/meter', parse_absolute_field],
-#     97: ['E(phi) magnitude', 'volts/meter', parse_absolute_field],
-#     98: ['E(theta) magnitude', 'volts/meter', parse_absolute_field],
-#     99: ['E(R) phase', 'degrees', parse_absolute_field],
-#     100: ['E(phi) phase', ' degrees', parse_absolute_field],
-#     101: ['E(theta) phase', ' degrees', parse_absolute_field],
-# }
-
-
-# # def parse_block(data):
-# #     type, length = struct.unpack('<BH', data[0:3])
-# #     descr, unit, handler = block_types.get(type, ['unknown', '', None])
-# #     output('block type=%d (%s) length=%d' % (type, descr, length))
-# #     if handler:
-# #         handler(descr, unit, data[3:length])
-# #     return length
-
-
-# def parse_header(data):
-#     version, header_len, source_len, title_len, env_len, notes_len = struct.unpack('<BHBBBH', data[0:8])
-#     data = data[8:]
-
-#     source = data[0:source_len]
-#     data = data[source_len:]
-
-#     title = data[0:title_len]
-#     data = data[title_len:]
-
-#     env = data[0:env_len]
-#     data = data[env_len:]
-
-#     notes = data[0:notes_len]
-#     data = data[notes_len:]
-
-#     output('version=%d.%d' % (version >> 4, version & 0xf))
-#     output('header len=%d (%d)' % (header_len, source_len + title_len + env_len + notes_len))
-#     output('source len=%d' % source_len)
-#     output('source=|%s|' % source)
-#     output('title len=%d' % title_len)
-#     output('title=|%s|' % title)
-#     output('env len=%d' % env_len)
-#     output('env=|%s|' % env)
-#     output('notes len=%d' % notes_len)
-#     output('notes=|%s|' % notes)
-
-#     return header_len
-
-
-# def parse_block(data):
-#     block_type, length = struct.unpack('<BH', data[0:3])
-#     descr, unit, handler = block_types.get(block_type, ['unknown', '', None])
-#     output('block type=%d (%s) length=%d' % (block_type, descr, length))
-#     if handler:
-#         handler(descr, unit, data[3:length])
-#     return length
-
-
-
-# def parse(data):
-#     n = parse_header(data)
-#     data = data[n:]
-#     while len(data) > 0:
-#         n = parse_block(data)
-#         data = data[n:]
-
-# class Header:
-#     def __init__(self):
-#         pass
-
-#     def load(self, data):
-#         version, header_len, source_len, title_len, env_len, notes_len = struct.unpack('<BHBBBH', data[0:8])
-#         data = data[8:]
-
-#         source = data[0:source_len]
-#         data = data[source_len:]
-
-#         title = data[0:title_len]
-#         data = data[title_len:]
-
-#         env = data[0:env_len]
-#         data = data[env_len:]
-
-#         notes = data[0:notes_len]
-#         data = data[notes_len:]
-
-#         output('version=%d.%d' % (version >> 4, version & 0xf))
-#         output('header len=%d (%d)' % (header_len, source_len + title_len + env_len + notes_len))
-#         output('source len=%d' % source_len)
-#         output('source=|%s|' % source)
-#         output('title len=%d' % title_len)
-#         output('title=|%s|' % title)
-#         output('env len=%d' % env_len)
-#         output('env=|%s|' % env)
-#         output('notes len=%d' % notes_len)
-#         output('notes=|%s|' % notes)
-
-#         return header_len
-
-
-# class Blocks:
-#     def __init__(self):
-#         self.block_list = []
-
-#     def load(self, data):
-#         remaining_len = parse_header(data)
-#         data = data[n:]
-#         while len(data) > 0:
-#             n = parse_block(data)
-#             data = data[n:]
-
-
-# def load(file_name):
-#     with open(file_name, 'rb') as buff:
-#         data = buff.read()
-#         print(len(data))
+import numpy as np
+import pandas as pd
+import easier as ezr
 
 
 class Block:
-    pass
+    LOOKUP = {
+        0: 'No-Op',
+        1: 'Total magnitude',
+        2: 'Horizontal magnitude',
+        3: 'Vertical magnitude',
+        4: 'Right-circular magnitude',
+        5: 'Left-circular magnitude',
+        6: 'Major-axis magnitude',
+        7: 'Minor-axis magnitude',
+        8: 'Ellipticity',
+        9: 'Total phase',
+        10: 'Horizontal phase',
+        11: 'Vertical phase',
+        12: 'Right-circular phase',
+        13: 'Left-circular phase',
+        14: 'Major-axis phase',
+        15: 'Minor-axis phase',
+        16: 'Polarization tilt',
+    }
+    block_type = None
+    block_len = None
+    title_len = None
+    environment_len = None
+    notes_len = None
+    freq = None
+    plane = None
+    plane_angle = None
+    symmetry = None
+    num_points = None
+    first_angle = None
+    angle_delta = None
+    points = None
+    title = None
+    environment = None
+    notes = None
+
+    def __init__(self, **kwargs):
+        for k, v in kwargs.items():
+            setattr(self, k, v)
+
+    def __str__(self):
+        return f'Block({self.LOOKUP[self.block_type]} theta={self.plane_angle})'
+
+    @property
+    def quantity(self):
+        return self.LOOKUP[self.block_type]
+       
+    def __repr__(self):
+        return self.__str__()
+
+    @property
+    def az_angles(self):
+        return self.first_angle + self.angle_delta * np.arange(self.num_points)
+
 
 
 class Extractor:
@@ -252,29 +99,39 @@ class Extractor:
         self.marker += 4
         return  struct.unpack('<f', self.data[marker:marker + 4])[0]
 
+    def read_numpy(self, dtype, num_points):
+        marker = self.marker
+        self.marker += 4 * num_points
+        return np.frombuffer(self.data, dtype=dtype, count=num_points, offset=marker)
+
     def read_block(self):
-        block_type = self.read_byte()
-        block_len = self.read_word()
-        title_len = self.read_byte()
-        environment_len = self.read_byte()
-        notes_len = self.read_word()
-        freq = self.read_float()
-        plane = self.read_byte()
-        plane_angle = self.read_float()
-        symmetry = self.read_byte()
-        num_points = self.read_word()
-        title = self.read_string(title_len)
-        environment = self.read_string(environment_len)
-        notes = self.read_string(environment_len)
+        kwargs = {}
+        kwargs['block_type'] = self.read_byte()
+        if kwargs['block_type'] != 0:
+            kwargs['block_len'] = self.read_word()
+            kwargs['title_len'] = self.read_byte()
+            kwargs['environment_len'] = self.read_byte()
+            kwargs['notes_len'] = self.read_word()
+            kwargs['freq'] = self.read_float()
+            kwargs['plane'] = self.read_byte()
+            kwargs['plane_angle'] = self.read_float()
+            kwargs['symmetry'] = self.read_byte()
+            kwargs['num_points'] = self.read_word()
+            kwargs['first_angle'] = self.read_float()
+            kwargs['angle_delta'] = self.read_float()
+            kwargs['points'] = self.read_numpy(np.float32, kwargs['num_points'])
+            kwargs['title'] = self.read_string(kwargs['title_len'])
+            kwargs['environment'] = self.read_string(kwargs['environment_len'])
+            kwargs['notes'] = self.read_string(kwargs['notes_len'])
 
-        """
-        I need to figure the right way to construct a block object here.
-        """
+        return Block(**kwargs)
 
-        print(block_type, block_len, title_len, environment_len, notes_len, freq)
-        print(title)
-        print(environment)
-        print(notes)
+    def read_blocks(self):
+        block_list = []
+        while self.marker < len(self.data):
+            block_list.append(self.read_block())
+
+        return block_list
 
 
 class Meta:
@@ -290,6 +147,7 @@ class Meta:
         self.obj = obj
         data = obj.data
         marker = 8
+        data_size = len(data)
         version, header_len, source_len, title_len, env_len, notes_len = struct.unpack('<BHBBBH', data[0:marker])
 
 
@@ -307,65 +165,43 @@ class Meta:
         setattr(self, 'environment', extractor.read_string(env_len))
         setattr(self, 'notes', extractor.read_string(notes_len))
 
-        extractor.read_block()
 
 
+        self.blocks = extractor.read_blocks()
         return self
-
-
-
-def get_string(data, start, size):
-    return data[start: start + size].decode('utf-8') 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 class PF:
     meta = Meta()
     def __init__(self, data):
         self.data = data
 
+    @ezr.cached_container
+    def df(self):
+        df_list = []
+
+        for block in self.meta.blocks:
+            df = pd.DataFrame(dict(
+                phi=block.az_angles,
+                value=block.points
+            ))
+            df['freq'] = block.freq
+            df['quantity'] = ezr.slugify(block.quantity)
+            df['theta'] = block.plane_angle
+            df_list.append(df)
+        df = pd.concat(df_list, ignore_index=True, sort=False)
+
+        df = df[[
+            'quantity',
+            'theta',
+            'phi',
+            'value',
+            'freq',
+        ]]
+        return df
 
 
-    # data = data[8:]
 
-    # source = data[0:source_len]
-    # data = data[source_len:]
-
-    # title = data[0:title_len]
-    # data = data[title_len:]
-
-    # env = data[0:env_len]
-    # data = data[env_len:]
-
-    # notes = data[0:notes_len]
-    # data = data[notes_len:]
-
-    # output('version=%d.%d' % (version >> 4, version & 0xf))
-    # output('header len=%d (%d)' % (header_len, source_len + title_len + env_len + notes_len))
-    # output('source len=%d' % source_len)
-    # output('source=|%s|' % source)
-    # output('title len=%d' % title_len)
-    # output('title=|%s|' % title)
-    # output('env len=%d' % env_len)
-    # output('env=|%s|' % env)
-    # output('notes len=%d' % notes_len)
-    # output('notes=|%s|' % notes)
-
-    # return header_len
-
-
+    
 
 
 @click.command()
@@ -374,7 +210,10 @@ def main(input_file):
     with open(input_file, 'rb') as buff:
         data = buff.read()
         pf = PF(data)
-        print(pf.meta)
+
+    df = pf.df
+    print(df.head().to_string())
+    print(df.quantity.value_counts())
 
 
 
