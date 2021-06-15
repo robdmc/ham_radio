@@ -1,48 +1,67 @@
-#!/usr/bin/python
+#! /usr/bin/env python
 # -*- encoding: utf-8; -*-
 # Copyright 2016 © Hans Insulander <hans@codium.se>
 
-import struct, sys, getopt, os
+import os
+import sys
+import getopt
+import struct
 
 out = sys.stdout
+
+
 def output(s):
     global out
     out.write(s)
     out.write(os.linesep)
 
+
 def parse_planar_cut(descr, unit, data):
-    output('planar cut: %s'%descr)
-    title_len, env_len, notes_len, frequency, plane, plane_angle, symmetry, number_of_points, first_angle, angular_increment = struct.unpack('<BBHfBfBHff', data[0:24])
+    output('planar cut: %s' % descr)
+    (
+        title_len,
+        env_len,
+        notes_len,
+        frequency,
+        plane,
+        plane_angle,
+        symmetry,
+        number_of_points,
+        first_angle,
+        angular_increment
+    ) = struct.unpack('<BBHfBfBHff', data[0:24])
     data = data[24:]
-    points = struct.unpack('f'*number_of_points, data[0:4*number_of_points])
-    data = data[4*number_of_points:]
+    points = struct.unpack('f' * number_of_points, data[0:4 * number_of_points])
+    data = data[4 * number_of_points:]
     title = data[0:title_len]
     data = data[title_len:]
     env = data[0:env_len]
     data = data[env_len:]
     notes = data[0:notes_len]
     data = data[notes_len:]
-    output('  data len=%d'%len(data))
-    output('  title_len=%d'%title_len)
-    output('  env_len=%d'%env_len)
-    output('  notes_len=%d'%notes_len)
-    output('  frequency=%f'%frequency)
-    output('  plane=%d'%plane)
-    output('  plane_angle=%d'%plane_angle)
-    output('  symmetry=%d'%symmetry)
-    output('  number_of_points=%d'%number_of_points)
-    output('  first_angle=%f'%first_angle)
-    output('  angular_increment=%f'%angular_increment)
-    output('  points len=%d'%len(points))
-    output('  unit:%s'%unit)
-    output('  points:%s'%', '.join(['%f'%p for p in points]))
-    output('  title=|%s|'%title)
-    output('  env=|%s|'%env)
-    output('  notes=|%s|'%notes)
-    output('  remaining data len=%d'%len(data))
+    output('  data len=%d' % len(data))
+    output('  title_len=%d' % title_len)
+    output('  env_len=%d' % env_len)
+    output('  notes_len=%d' % notes_len)
+    output('  frequency=%f' % frequency)
+    output('  plane=%d' % plane)
+    output('  plane_angle=%d' % plane_angle)
+    output('  symmetry=%d' % symmetry)
+    output('  number_of_points=%d' % number_of_points)
+    output('  first_angle=%f' % first_angle)
+    output('  angular_increment=%f' % angular_increment)
+    output('  points len=%d' % len(points))
+    output('  unit:%s' % unit)
+    output('  points:%s' % ', '.join(['%f' % p for p in points]))
+    output('  title=|%s|' % title)
+    output('  env=|%s|' % env)
+    output('  notes=|%s|' % notes)
+    output('  remaining data len=%d' % len(data))
+
 
 def parse_absolute_field(descr, unit, data):
-    output('absolute field: %s'%descr)
+    output('absolute field: %s' % descr)
+
 
 block_types = {
     0: ['No-Op', '', None],
@@ -89,13 +108,15 @@ block_types = {
     101: ['E(theta) phase', ' degrees', parse_absolute_field],
 }
 
+
 def parse_block(data):
     type, length = struct.unpack('<BH', data[0:3])
     descr, unit, handler = block_types.get(type, ['unknown', '', None])
-    output('block type=%d (%s) length=%d'%(type, descr, length))
+    output('block type=%d (%s) length=%d' % (type, descr, length))
     if handler:
         handler(descr, unit, data[3:length])
     return length
+
 
 def parse_header(data):
     version, header_len, source_len, title_len, env_len, notes_len = struct.unpack('<BHBBBH', data[0:8])
@@ -113,18 +134,19 @@ def parse_header(data):
     notes = data[0:notes_len]
     data = data[notes_len:]
 
-    output('version=%d.%d'%(version >> 4, version&0xf))
-    output('header len=%d (%d)'%(header_len, source_len+title_len+env_len+notes_len))
-    output('source len=%d'%source_len)
-    output('source=|%s|'%source)
-    output('title len=%d'%title_len)
-    output('title=|%s|'%title)
-    output('env len=%d'%env_len)
-    output('env=|%s|'%env)
-    output('notes len=%d'%notes_len)
-    output('notes=|%s|'%notes)
+    output('version=%d.%d' % (version >> 4, version & 0xf))
+    output('header len=%d (%d)' % (header_len, source_len + title_len + env_len + notes_len))
+    output('source len=%d' % source_len)
+    output('source=|%s|' % source)
+    output('title len=%d' % title_len)
+    output('title=|%s|' % title)
+    output('env len=%d' % env_len)
+    output('env=|%s|' % env)
+    output('notes len=%d' % notes_len)
+    output('notes=|%s|' % notes)
 
     return header_len
+
 
 def parse(data):
     n = parse_header(data)
@@ -133,7 +155,10 @@ def parse(data):
         n = parse_block(data)
         data = data[n:]
 
+
 HELP = "Usage: python %s [-o <outfile>] <infile>" % sys.argv[0]
+
+
 def main(argv):
     global out
     try:
@@ -141,7 +166,7 @@ def main(argv):
 
         for opt, arg in opts:
             if opt == '-h':
-                print HELP
+                print(HELP)
                 sys.exit(0)
             elif opt == '-o':
                 out = open(arg, 'w')
@@ -150,7 +175,8 @@ def main(argv):
             data = f.read()
             parse(data)
     except getopt.GetoptError:
-        print HELP
+        print(HELP)
+
 
 if __name__ == '__main__':
     sys.exit(main(sys.argv))
