@@ -218,6 +218,10 @@ out = sys.stdout
 #         print(len(data))
 
 
+class Block:
+    pass
+
+
 class Extractor:
     def __init__(self, data, marker=0):
         self.data = data
@@ -231,6 +235,42 @@ class Extractor:
     def read_string(self, size):
         blob = self.read_bytes(size)
         return blob.decode('utf-8')
+
+    def read_byte(self):
+        marker = self.marker
+        self.marker += 1
+        return  struct.unpack('<B', self.data[marker:marker + 1])[0]
+
+    def read_word(self):
+        marker = self.marker
+        self.marker += 2
+        return  struct.unpack('<H', self.data[marker:marker + 2])[0]
+        # return int.from_bytes(self.data[marker:marker + 2], 'little')
+
+    def read_float(self):
+        marker = self.marker
+        self.marker += 4
+        return  struct.unpack('<f', self.data[marker:marker + 4])[0]
+
+    def read_block(self):
+        block_type = self.read_byte()
+        block_len = self.read_word()
+        title_len = self.read_byte()
+        environment_len = self.read_byte()
+        notes_len = self.read_word()
+        freq = self.read_float()
+        plane = self.read_byte()
+        plane_angle = self.read_float()
+        symmetry = self.read_byte()
+        num_points = self.read_word()
+        title = self.read_string(title_len)
+        environment = self.read_string(environment_len)
+        notes = self.read_string(environment_len)
+
+        print(block_type, block_len, title_len, environment_len, notes_len, freq)
+        print(title)
+        print(environment)
+        print(notes)
 
 
 class Meta:
@@ -262,6 +302,8 @@ class Meta:
         setattr(self, 'title', extractor.read_string(title_len))
         setattr(self, 'environment', extractor.read_string(env_len))
         setattr(self, 'notes', extractor.read_string(notes_len))
+
+        extractor.read_block()
 
 
         return self
