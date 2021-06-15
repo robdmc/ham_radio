@@ -267,6 +267,10 @@ class Extractor:
         environment = self.read_string(environment_len)
         notes = self.read_string(environment_len)
 
+        """
+        I need to figure the right way to construct a block object here.
+        """
+
         print(block_type, block_len, title_len, environment_len, notes_len, freq)
         print(title)
         print(environment)
