@@ -1,32 +1,30 @@
 CM 
 CE
-SY lam = 70.45
-SY nsegs = 11
-SY l = 1 * lam
-SY n = 16
-SY a = 1.02
-SY f=.5
-SY h = f * lam
-SY dh = .2 * lam
-SY r = l / (a ^ (n / 2) * (1 + 1 / a ^ .5))
-SY phi = 180
-SY x0 = r * cos(0 * phi) * a ^ (0 / 4)
-SY y0 = r * sin(0 * phi) * a ^ (0 / 4)
-SY x1 = r * cos(1 * phi) * a ^ (1 / 4)
-SY y1 = r * sin(1 * phi) * a ^ (1 / 4)
-SY x2 = r * cos(2 * phi) * a ^ (2 / 4)
-SY y2 = r * sin(2 * phi) * a ^ (2 / 4)
-SY x3 = r * cos(3 * phi) * a ^ (3 / 4)
-SY y3 = r * sin(3 * phi) * a ^ (3 / 4)
-SY x4 = r * cos(4 * phi) * a ^ (4 / 4)
-SY y4 = r * sin(4 * phi) * a ^ (4 / 4)
-GW	1	nsegs	x1	y1	h	x2	y2	h	#14
-GW	2	nsegs	x2	y2	h	x3	y3	h	#14
-GW	3	nsegs	x3	y3	h	x4	y4	h	#14
-GW	4	nsegs	x4	y4	h	x1	y1	h	#14
+SY lam=70.45*3
+SY theta=30
+SY x = lam * cos(theta) / (1 + sin(theta))
+SY y = lam * sin(theta) / (1 + sin(theta))
+SY r=#20
+SY n_segs=89
+SY drive_seg=1
+SY h_frac=.5
+SY h=40
+SY sep=.125
+SY hf=h
+SY hr=h
+SY hl=h
+GW	1	n_segs	0	sep	hf	x	y	hl	r
+GW	2	n_segs	0	-sep	hf	x	-y	hr	r
+GW	3	n_segs	x	-y	hr	x	y	hl	r
+GW	4	1	0	-sep	hf	0	sep	hf	r
 GS	0	0	0.3048
 GE	1
+LD	5	1	1	n_segs	58000000
+LD	5	2	1	n_segs	58000000
+LD	5	3	1	n_segs	58000000
+LD	5	4	1	1	58000000
 GN	2	0	0	0	13	0.005
 EK
+EX	0	4	drive_seg	0	0	0	0
 FR	0	0	0	0	14.1	0
 EN
