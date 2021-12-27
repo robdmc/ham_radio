@@ -1,0 +1,28 @@
+CM Here are some comments
+CE
+SY n_segs=15
+SY b=1
+SY h=30
+SY br=.5
+SY r=15	'horiz_len
+SY a=.06
+SY phi1=0
+SY nr_segs=5
+GW	1	n_segs	0	0	b	0	0	b + h	a	'vertical
+GW	2	1	0	0	br	0	0	b	a	'feed
+GW	3	nr_segs	0	0	br	r * cos(phi1)	r * sin(phi1)	br	a	'radial
+GS	0	0	0.3048
+GE	1
+LD	5	1	1	n_segs	58000000	'radiator
+LD	5	2	1	n_segs	58000000
+LD	5	3	1	n_segs	58000000
+
+
+
+
+GN	2	0	0	0	13	0.005
+EK
+EX	0	2	1	0	0	0	0
+
+FR	0	0	0	0	14.1	0
+EN
