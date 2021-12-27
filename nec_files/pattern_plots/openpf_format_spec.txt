@@ -1,0 +1,439 @@
+                   OpenPF Plot-File Standard
+	                   Version 1.0  June 1, 1995
+
+
+	        OpenPF is an open, nonproprietary standard for computer
+	files that contain electromagnetic-field data.  OpenPF is
+	intended for files created by antenna-analysis programs and for
+	files containing measurements.  OpenPF files can be used to
+	archive or transport data.  Programs can use the files to plot
+	fields and radiation patterns on a screen, printer, or plotter.
+
+	        The OpenPF file format is extensible.  Data is organized
+	into blocks that begin with a block-type identifier followed by
+	block length.  This structure allows a file parser to skip and
+	ignore blocks it's not designed to handle, including block types
+	defined in future revisions of OpenPF.
+
+	        The blocks defined below provide for 2-D relative far-
+	field data (azimuth and elevation radiation patterns) and 3-D
+	absolute near- and far-field data.  3-D radiation patterns can
+	be represented by a set of 2-D data blocks.
+
+	        The file format enables a single file to contain near-
+	and far-field data, absolute and relative data, azimuth and
+	elevation data, low- and high-resolution data, partial- and
+	full-data cuts, data for multiple frequencies, and unidentified
+	data.
+
+	        The file format provides for new fields in future OpenPF
+	revisions without the overhead of reserved bytes.  New fields
+	can be appended to any file block.  File parsers that use block
+	length to advance to the next block will skip over new fields.
+
+	        OpenPF uses standard coordinate systems.  For
+	rectangular coordinates, X and Y are in the horizontal plane and
+	Z is height.  For spherical coordinates, R is radial distance,
+	phi is azimuth angle, and theta is zenith angle.  For
+	cylindrical coordinates, rho is horizontal distance, phi is
+	azimuth angle, and z is height.  Azimuth angle is 0 along the X
+	axis and increases in the XY plane toward the Y axis
+	(counterclockwise).  Zenith angle is 0 along the Z axis and
+	increases in the Z-phi plane toward the phi ray.  Units are
+	meters and degrees.
+
+	        OpenPF files use the Intel-processor "little-endian"
+	data convention (least-significant byte first for multibyte
+	data).  Bit number 0 is the least-significant bit.  Bits marked
+	as reserved are undefined and should not be assumed to be 0.
+	OpenPF files use the file extension ".PF".
+
+	        In the descriptions that follow, word means a 16-bit
+	unsigned integer and FP means a 32-bit, single-precision,
+	floating-point number that conforms to the IEEE-754-1985
+	standard.  ASCII means a character string that uses the
+	extended-ASCII PC-8 symbol set.
+
+
+
+
+
+	                             Header
+
+
+	        OpenPF files begin with a block of the following format:
+
+
+	                Version                 byte
+	                Header length           word
+	                Source length           byte
+	                Title length            byte
+	                Environment length      byte
+	                Notes length            word
+	                Source                  ASCII
+	                Title                   ASCII
+	                Environment             ASCII
+	                Notes                   ASCII
+
+
+	Version
+
+	        This byte identifies the OpenPF version used to generate
+	the file.  The version number consists of a major revision (an
+	integer) and a minor revision (an integer between 0 and 9)
+	separated by a decimal point.  The upper nibble (4 bits)
+	contains the major revision and the lower nibble the minor.
+
+
+	Header Length
+
+	        This field is the total length of the header in bytes.
+	File parsers should use this length to advance past the header
+	instead of assuming that data blocks begin immediately after the
+	notes string.  Future OpenPF revisions may define additional
+	fields after the notes string.  Header lengths less than 3 are
+	invalid.
+
+
+	Source, Title, Environment, and Notes Lengths
+
+	        These fields specify the lengths in bytes of the ASCII
+	strings.  Zero is valid.
+
+
+	Source String
+
+	        This string identifies the data source.  This may be an
+	antenna-analysis program, an antenna-test range, a laboratory,
+	etc.  No bytes are allocated for a zero-length string.
+
+
+	Title, Environment, and Notes Strings
+
+	        The title string describes the antenna.  The environment
+	string describes the antenna environment (free space, antenna
+	height, ground constants, etc.).  The notes string contains
+	auxiliary information that might be displayed only upon request.
+	Data blocks that follow may contain strings that override these
+	global strings.  No bytes are allocated for zero-length strings.
+
+
+	                          Data Blocks
+
+
+	        Data following the header is organized into blocks.
+	Each data block begins with block type (a byte) followed by
+	block length (a word).  Block types 0 through 127 are standard
+	and reserved.  Programs may use types 128 through 255 for
+	special purposes, but block length must always follow block type
+	so that file parsers can skip over the block.  Blocks may appear
+	in any order.  The following standard blocks are defined:
+
+
+	                           NOP Block
+
+
+	                Block type              byte (0)
+	                Block length            word
+	                Rest of block
+
+
+	        Block type 0 is a no-operation block.  Its purpose is to
+	provide a standard ignore-me block.  Normally this block isn't
+	used, but it may be convenient when patching a file.  Block
+	length is the total length of the block in bytes.  Block lengths
+	less than 3 are invalid.
+
+
+	                   Relative Far-Field Blocks
+
+
+	                Block type              byte (1-16)
+	                Block length            word
+	                Title length            byte
+	                Environment length      byte
+	                Notes length            word
+	                Frequency               FP
+	                Plane                   byte
+	                Plane angle             FP
+	                Symmetry                byte
+	                Number of points        word
+	                First angle             FP
+	                Angular increment       FP
+	                Data points             each FP
+	                Title                   ASCII
+	                Environment             ASCII
+	                Notes                   ASCII
+
+
+	Block Type
+
+	        Block types 1-16 contain planar cuts of relative far-
+	field data as follows:
+
+	Block           Data                    Units
+
+	  1     Total magnitude                 dBi
+	  2     Horizontal magnitude            dBi
+	  3     Vertical magnitude              dBi
+
+
+	  4     Right-circular magnitude        dBic
+	  5     Left-circular magnitude         dBic
+	  6     Major-axis magnitude            dBi
+	  7     Minor-axis magnitude            dBi
+	  8     Ellipticity                     dB
+	  9     Total phase                     degrees
+	 10     Horizontal phase                degrees
+	 11     Vertical phase                  degrees
+	 12     Right-circular phase            degrees
+	 13     Left-circular phase             degrees
+	 14     Major-axis phase                degrees
+	 15     Minor-axis phase                degrees
+	 16     Polarization tilt               degrees
+
+	        Ellipticity is the length of the minor axis of the
+	polarization ellipse divided by the length of the major axis
+	expressed in dB (the IEEE-754-1985 floating-point code for
+	-infinity is valid).  Polarization tilt is the counterclockwise
+	angle between the major axis and the E(theta) direction.
+
+
+	Block Length
+
+	        This field is the total length of the block in bytes.
+	Block lengths less than 3 are invalid.
+
+
+	Title, Environment, and Notes Lengths
+
+	        These fields specify the lengths of the ASCII strings in
+	bytes.  Zero is valid.
+
+
+	Frequency
+
+	        Frequency is in MHz.
+
+
+	Plane
+
+	        This byte is 0 for azimuth data (constant zenith angle)
+	and 1 for elevation data (constant azimuth angle).  Other values
+	are reserved.
+
+
+	Plane Angle
+
+	        This field is the zenith angle for azimuth data and the
+	azimuth angle for elevation data.
+
+
+
+
+	Symmetry
+
+	        The bits of this byte have the following meaning when
+	set:
+
+	        Bit     Azimuth Data       Elevation Data
+
+	         0      X symmetry         XY symmetry
+	         1      Y symmetry         Z symmetry
+
+	        Symmetry means that the data has the same value when
+	reflected about the line or plane indicated.  For azimuth data,
+	bits 0 and 1 refer to the X and Y axes.  For elevation data,
+	they refer to the XY plane and the Z axis.  Both bits may be set
+	simultaneously.  Bits 2-7 are reserved.
+
+
+	Number of Points
+
+	        This field is the number of data points that follow.  0
+	is valid.
+
+
+	First Angle
+
+	        This field is the angle of the first data point.
+
+
+	Angular Increment
+
+	        This field defines the sign and magnitude of the angular
+	difference between successive data points.
+
+
+	Data Points
+
+	        The data set begins at the first angle.  The angles of
+	successive data samples differ by the angular increment.
+
+
+	Title, Environment, and Notes Strings
+
+	        When string length is nonzero, the string overrides the
+	corresponding header string for this block.  When zero, the
+	header string applies for this block and no string space is
+	allocated.
+
+
+	              Absolute Near- and Far-Field Blocks
+
+
+	ˇ               Block type              byte (64-81 & 96-101)
+	                Block length            word
+	                Title length            byte
+	                Environment length      byte
+	                Notes length            word
+	                Frequency               FP
+	                Power                   FP
+
+
+	                Coordinate system       byte
+	                Symmetry                byte
+	                Number of A points      word
+	                First A                 FP
+	                A increment             FP
+	                Number of B points      word
+	                First B                 FP
+	                B increment             FP
+	                Number of C points      word
+	                First C                 FP
+	                C increment             FP
+	                Data points             each FP
+	                Title                   ASCII
+	                Environment             ASCII
+	                Notes                   ASCII
+
+
+	Block Type
+
+	        Block types 64-81 contain absolute fields.  Block types
+	67-81 are field components resolved in rectangular coordinates.
+	These blocks are defined as follows:
+
+	Block           Data            Units
+
+	 64     Power density           watts/square-meter
+	 65     Peak E magnitude        volts/meter
+	 66     Peak H magnitude        amps/meter
+	 67     Px Poynting vector      watts/square-meter
+	 68     Py Poynting vector      watts/square-meter
+	 69     Pz Poynting vector      watts/square-meter
+	 70     Ex magnitude            volts/meter
+	 71     Ey magnitude            volts/meter
+	 72     Ez magnitude            volts/meter
+	 73     Hx magnitude            amps/meter
+	 74     Hy magnitude            amps/meter
+	 75     Hz magnitude            amps/meter
+	 76     Ex phase                degrees
+	 77     Ey phase                degrees
+	 78     Ez phase                degrees
+	 79     Hx phase                degrees
+	 80     Hy phase                degrees
+	 81     Hz phase                degrees
+
+	        Block types 96-101 contain absolute electric-field
+	components resolved in spherical coordinates as follows:
+
+	Block           Data            Units
+
+	 96     E(R) magnitude          volts/meter
+	 97     E(phi) magnitude        volts/meter
+	 98     E(theta) magnitude      volts/meter
+	 99     E(R) phase              degrees
+
+
+	100     E(phi) phase            degrees
+	101     E(theta) phase          degrees
+
+	        Use block type 65 for peak E magnitude.
+
+
+	Block Length, String Lengths, and Frequency
+
+	        These fields are the same as for relative far-field
+	blocks.
+
+
+	Power
+
+	        This field is antenna input power in watts.
+
+
+	Coordinate System
+
+	        This byte specifies the coordinate system used to locate
+	data points (it does not specify the coordinate system used to
+	resolve field components).  The byte is 0 for rectangular
+	coordinates, 1 for spherical coordinates, and 2 for cylindrical
+	coordinates.  Other values are reserved.  Coordinates are
+	defined as follows:
+
+	        Coordinate System       A       B       C
+
+	        0     Rectangular       X       Y       Z
+	        1     Spherical         R       phi     theta
+	        2     Cylindrical       rho     phi     z
+
+
+	Symmetry
+
+	        The low-order bits of this byte have the following
+	meaning when set:
+
+	        Bit     Meaning
+
+	         0      A-coordinate symmetry
+	         1      B-coordinate symmetry
+	         2      C-coordinate symmetry
+
+	        Here, symmetry means that the data has the same value
+	when the coordinate is negated (this definition is not the same
+	as that for relative fields).  Any of the bits may be set
+	simultaneously.  Bits 3-7 are reserved.
+
+
+	Number of A, B, or C points
+
+	        These fields specify the number of points for each
+	coordinate.  0 is invalid.  The total number of data points is
+	the product of A, B, and C.  For rectangular coordinates, the
+	field is computed over a point, line, rectangular surface, or
+	rectangular volume.  For spherical coordinates, the field is
+	computed over a point, line, circle, disc, spherical surface,
+
+
+	spheroid, or portion thereof.  For cylindrical coordinates, the
+	field is computed over a point, line, circle, disc, cylindrical
+	surface, cylindrical volume, or portion thereof.
+
+
+	First A, B, and C
+
+	        These fields specify the starting values of each
+	coordinate.
+
+
+	A, B, and C Increments
+
+	        These fields define the sign and magnitude of the
+	difference between successive coordinate values.
+
+
+	Data Points
+
+	        Points are ordered as follows:  A cycles from first to
+	last, then B, and finally C.  The coordinate values of
+	successive data samples differ by the A, B, or C increments.
+
+
+	Title, Environment, and Notes Strings
+
+	        These fields are the same as for relative far-field
+	blocks.
+
+
+
