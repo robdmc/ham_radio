@@ -122,31 +122,35 @@ class Antenna:
         return out
 
     def radials(self, number, length, origin=None, dia=None, nsegs=None):
-        import math
+        # import math
         if origin is None:
             origin = [0, 0, 0]
 
         if nsegs is None:
             nsegs = self.nsegs
 
+        if dia is None:
+            dia = self.dia
+
         radials = []
-        d_theta = 2 * math.pi / number
+        d_theta = 360 / number
         for nn in range(number):
             theta = nn * d_theta
-            x = round(origin[0] + length * math.cos(theta), 3)
-            y = round(origin[1] + length * math.sin(theta), 3)
+            x = f'{origin[0]} + {length} * cos({round(theta, 1)})'
+            y = f'{origin[0]} + {length} * sin({round(theta, 1)})'
             z = origin[2]
-            self.wire(starting=origin, ending=[x, y, z], nsegs=nsegs)
+            self.wire(starting=origin, ending=[x, y, z], nsegs=nsegs, dia=dia)
 
 
 if __name__ == '__main__':
     ant = Antenna(units='m')
     ant.symbols(
         h=10,
-        dia=.001
+        dia='dia',
+        l=10,
+        b = .1
     )
-    ant.wire([0, 0, 0], [0, 0, 'h'], source_seg=1, dia='dia')
-    ant.wire([0, 0, 'h'], [0, 0, '2*h'], dia='dia')
-    ant.radials(32, 10)
+    ant.wire(['b', 0, 0], [0, 0, 'b + h'], source_seg=1, dia='dia')
+    ant.radials(4, 'l', origin=[0, 0, 'b'], dia='dia')
 
     print(ant.write())
