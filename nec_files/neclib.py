@@ -143,14 +143,14 @@ class Antenna:
 
 
 if __name__ == '__main__':
-    ant = Antenna(units='m')
+    ant = Antenna(nsegs=13, units='m')
     ant.symbols(
-        h=10,
-        dia='dia',
-        l=10,
-        b = .1
+        h=10.2,
+        dia=.016,
+        l=5,
+        b = .05,
     )
-    ant.wire(['b', 0, 0], [0, 0, 'b + h'], source_seg=1, dia='dia')
-    ant.radials(4, 'l', origin=[0, 0, 'b'], dia='dia')
+    ant.wire([0, 0, 'b'], [0, 0, 'b + h'], source_seg=1, dia='dia')
+    ant.radials(16, 'l', origin=[0, 0, 'b'], dia='dia', nsegs=3)
 
     print(ant.write())
