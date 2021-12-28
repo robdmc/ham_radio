@@ -21,17 +21,18 @@ class Wire:
             self.ending[0],
             self.ending[1],
             self.ending[2],
+            self.dia,
         ])
         return out
 
     def write_load(self):
-        out = f'LD\t5\t{self.tag}\t{self.nsegs}\t{self.conductivity}'
+        out = f'LD\t5\t{self.tag}\t1\t{self.nsegs}\t{self.conductivity}'
         return out
 
     def write_excitation(self):
         out = ''
         if self.source_seg != 'None':
-            out = f'EX\t0\t{self.tag}\t{self.source_seg}\t0\t0\t0\t0'
+            out = f'EX\t0\t{self.tag}\t{self.source_seg}\t0\t0'
         return out
 
 
@@ -139,16 +140,13 @@ class Antenna:
 
 
 if __name__ == '__main__':
-    ant = Antenna(units='ft')
+    ant = Antenna(units='m')
     ant.symbols(
         h=10,
-        l=20,
+        dia=.001
     )
-    ant.wire([0, 0, 0], [0, 0, 'h'], source_seg=1)
-    ant.wire([0, 0, 'h'], [0, 'l', 'h'])
-    ant.radials(number=16, length=5, origin=[0, 0, 0], nsegs=3)
+    ant.wire([0, 0, 0], [0, 0, 'h'], source_seg=1, dia='dia')
+    ant.wire([0, 0, 'h'], [0, 0, '2*h'], dia='dia')
+    ant.radials(32, 10)
 
-
-
-    print()
     print(ant.write())
