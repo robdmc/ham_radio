@@ -5,7 +5,7 @@ class Wire:
     starting = attr.ib(converter=lambda v: [str(e) for e in v])
     ending = attr.ib(converter=lambda v: [str(e) for e in v])
     tag = attr.ib(default=None, converter=str)
-    dia = attr.ib(default=None, converter=str)
+    rad = attr.ib(default=None, converter=str)
     nsegs = attr.ib(default=None, converter=str)
     source_seg = attr.ib(default=None, converter=str)
     conductivity = attr.ib(default=58000000, converter=str)
@@ -21,7 +21,7 @@ class Wire:
             self.ending[0],
             self.ending[1],
             self.ending[2],
-            self.dia,
+            self.rad,
         ])
         return out
 
@@ -40,7 +40,7 @@ class Wire:
 
 @attr.s
 class Antenna:
-    dia = attr.ib(default=.001628, converter=str)
+    rad = attr.ib(default=.001628, converter=str)
     nsegs = attr.ib(default=13)
     freq_mhz = attr.ib(default=7.15)
     symbols_dict = attr.ib(factory=lambda: {})
@@ -64,13 +64,13 @@ class Antenna:
     def symbols(self, **kwargs):
         self.symbols_dict.update(kwargs)
 
-    def wire(self, starting, ending, dia=None, nsegs=None, source_seg=None):
+    def wire(self, starting, ending, rad=None, nsegs=None, source_seg=None):
         nsegs = self.nsegs if nsegs is None else nsegs
-        dia = self.dia if dia is None else dia
+        rad = self.rad if rad is None else rad
         tag = str(len(self.wires_list) + 1)
-        self.wires_list.append(Wire(starting, ending, tag, dia, nsegs, source_seg))
+        self.wires_list.append(Wire(starting, ending, tag, rad, nsegs, source_seg))
 
-    def radials(self, number, height, length, origin=None, dia=None, nsegs=None):
+    def radials(self, number, height, length, origin=None, rad=None, nsegs=None):
         pass
 
     def _write_symbols(self):
@@ -121,7 +121,7 @@ class Antenna:
         ])
         return out
 
-    def radials(self, number, length, origin=None, dia=None, nsegs=None):
+    def radials(self, number, length, origin=None, rad=None, nsegs=None):
         # import math
         if origin is None:
             origin = [0, 0, 0]
@@ -129,8 +129,8 @@ class Antenna:
         if nsegs is None:
             nsegs = self.nsegs
 
-        if dia is None:
-            dia = self.dia
+        if rad is None:
+            rad = self.rad
 
         radials = []
         d_theta = 360 / number
@@ -139,18 +139,18 @@ class Antenna:
             x = f'{origin[0]} + {length} * cos({round(theta, 1)})'
             y = f'{origin[0]} + {length} * sin({round(theta, 1)})'
             z = origin[2]
-            self.wire(starting=origin, ending=[x, y, z], nsegs=nsegs, dia=dia)
+            self.wire(starting=origin, ending=[x, y, z], nsegs=nsegs, rad=rad)
 
 
 if __name__ == '__main__':
     ant = Antenna(nsegs=13, units='m')
     ant.symbols(
         h=10.2,
-        dia=.016,
+        rad=.016,
         l=5,
         b = .05,
     )
-    ant.wire([0, 0, 'b'], [0, 0, 'b + h'], source_seg=1, dia='dia')
-    ant.radials(16, 'l', origin=[0, 0, 'b'], dia='dia', nsegs=3)
+    ant.wire([0, 0, 'b'], [0, 0, 'b + h'], source_seg=1, rad='rad')
+    ant.radials(16, 'l', origin=[0, 0, 'b'], rad='rad', nsegs=3)
 
     print(ant.write())
