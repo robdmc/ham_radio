@@ -1,43 +1,42 @@
-CM 
+CM
 CE
 SY h_radial=0.08
 SY h_feed=0.25
-SY h_vert=10.2
+SY h_vert_40=9.95
+SY h_vert_30=6.49
+SY h_vert_20=4.95
+SY h_vert_17=3.58
 SY rad=0.016
 SY l_radial=5
 SY nsegs_el=11
 SY nsegs_radial=9
-SY sep=1
+SY sep=0.25
 GW	1	1	0	0	h_radial	0	0	h_feed	rad
-GW	2	1	-2*sep	0	h_feed	-sep	0	h_feed	rad
+GW	2	1	-2 * sep	0	h_feed	-sep	0	h_feed	rad
 GW	3	1	-sep	0	h_feed	0	0	h_feed	rad
 GW	4	1	0	0	h_feed	sep	0	h_feed	rad
-GW	5	1	sep	0	h_feed	2*sep	0	h_feed	rad
-GW	6	nsegs_el	-2*sep	0	h_feed	-2*sep	0	h_feed + 0.3183098861837907*h_vert	rad
-GW	7	nsegs_el	-1*sep	0	h_feed	-1*sep	0	h_feed + 0.42377720812375763*h_vert	rad
-GW	8	nsegs_el	-0*sep	0	h_feed	-0*sep	0	h_feed + 0.5641895835477563*h_vert	rad
-GW	9	nsegs_el	1*sep	0	h_feed	1*sep	0	h_feed + 0.7511255444649425*h_vert	rad
-GW	10	nsegs_el	2*sep	0	h_feed	2*sep	0	h_feed + 1.0*h_vert	rad
-GW	11	1	-2*sep	0	h_feed + 0.3183098861837907 * h_vert	-1*sep	0	h_feed + 0.42377720812375763*h_vert	rad
-GW	12	1	-1*sep	0	h_feed + 0.42377720812375763 * h_vert	-0*sep	0	h_feed + 0.5641895835477563*h_vert	rad
-GW	13	1	0*sep	0	h_feed + 0.5641895835477563 * h_vert	1*sep	0	h_feed + 0.7511255444649425*h_vert	rad
-GW	14	1	1*sep	0	h_feed + 0.7511255444649425 * h_vert	2*sep	0	h_feed + 1.0*h_vert	rad
-GW	15	nsegs_radial	0	0	h_radial	0 + l_radial * cos(0.0)	0 + l_radial * sin(0.0)	h_radial	rad
-GW	16	nsegs_radial	0	0	h_radial	0 + l_radial * cos(22.5)	0 + l_radial * sin(22.5)	h_radial	rad
-GW	17	nsegs_radial	0	0	h_radial	0 + l_radial * cos(45.0)	0 + l_radial * sin(45.0)	h_radial	rad
-GW	18	nsegs_radial	0	0	h_radial	0 + l_radial * cos(67.5)	0 + l_radial * sin(67.5)	h_radial	rad
-GW	19	nsegs_radial	0	0	h_radial	0 + l_radial * cos(90.0)	0 + l_radial * sin(90.0)	h_radial	rad
-GW	20	nsegs_radial	0	0	h_radial	0 + l_radial * cos(112.5)	0 + l_radial * sin(112.5)	h_radial	rad
-GW	21	nsegs_radial	0	0	h_radial	0 + l_radial * cos(135.0)	0 + l_radial * sin(135.0)	h_radial	rad
-GW	22	nsegs_radial	0	0	h_radial	0 + l_radial * cos(157.5)	0 + l_radial * sin(157.5)	h_radial	rad
-GW	23	nsegs_radial	0	0	h_radial	0 + l_radial * cos(180.0)	0 + l_radial * sin(180.0)	h_radial	rad
-GW	24	nsegs_radial	0	0	h_radial	0 + l_radial * cos(202.5)	0 + l_radial * sin(202.5)	h_radial	rad
-GW	25	nsegs_radial	0	0	h_radial	0 + l_radial * cos(225.0)	0 + l_radial * sin(225.0)	h_radial	rad
-GW	26	nsegs_radial	0	0	h_radial	0 + l_radial * cos(247.5)	0 + l_radial * sin(247.5)	h_radial	rad
-GW	27	nsegs_radial	0	0	h_radial	0 + l_radial * cos(270.0)	0 + l_radial * sin(270.0)	h_radial	rad
-GW	28	nsegs_radial	0	0	h_radial	0 + l_radial * cos(292.5)	0 + l_radial * sin(292.5)	h_radial	rad
-GW	29	nsegs_radial	0	0	h_radial	0 + l_radial * cos(315.0)	0 + l_radial * sin(315.0)	h_radial	rad
-GW	30	nsegs_radial	0	0	h_radial	0 + l_radial * cos(337.5)	0 + l_radial * sin(337.5)	h_radial	rad
+GW	5	1	sep	0	h_feed	2 * sep	0	h_feed	rad
+GW	6	nsegs_el	-2 * sep	0	h_feed	-2 * sep	0	h_feed + h_vert_40	rad
+GW	7	nsegs_el	-sep	0	h_feed	-sep	0	h_feed + h_vert_30	rad
+GW	8	nsegs_el	sep	0	h_feed	sep	0	h_feed + h_vert_20	rad
+GW	9	nsegs_el	2 * sep	0	h_feed	2 * sep	0	h_feed + h_vert_17	rad
+GW	10	nsegs_radial	0	0	h_radial	0 + l_radial * cos(0.0)	0 + l_radial * sin(0.0)	h_radial	rad
+GW	11	nsegs_radial	0	0	h_radial	0 + l_radial * cos(22.5)	0 + l_radial * sin(22.5)	h_radial	rad
+GW	12	nsegs_radial	0	0	h_radial	0 + l_radial * cos(45.0)	0 + l_radial * sin(45.0)	h_radial	rad
+GW	13	nsegs_radial	0	0	h_radial	0 + l_radial * cos(67.5)	0 + l_radial * sin(67.5)	h_radial	rad
+GW	14	nsegs_radial	0	0	h_radial	0 + l_radial * cos(90.0)	0 + l_radial * sin(90.0)	h_radial	rad
+GW	15	nsegs_radial	0	0	h_radial	0 + l_radial * cos(112.5)	0 + l_radial * sin(112.5)	h_radial	rad
+GW	16	nsegs_radial	0	0	h_radial	0 + l_radial * cos(135.0)	0 + l_radial * sin(135.0)	h_radial	rad
+GW	17	nsegs_radial	0	0	h_radial	0 + l_radial * cos(157.5)	0 + l_radial * sin(157.5)	h_radial	rad
+GW	18	nsegs_radial	0	0	h_radial	0 + l_radial * cos(180.0)	0 + l_radial * sin(180.0)	h_radial	rad
+GW	19	nsegs_radial	0	0	h_radial	0 + l_radial * cos(202.5)	0 + l_radial * sin(202.5)	h_radial	rad
+GW	20	nsegs_radial	0	0	h_radial	0 + l_radial * cos(225.0)	0 + l_radial * sin(225.0)	h_radial	rad
+GW	21	nsegs_radial	0	0	h_radial	0 + l_radial * cos(247.5)	0 + l_radial * sin(247.5)	h_radial	rad
+GW	22	nsegs_radial	0	0	h_radial	0 + l_radial * cos(270.0)	0 + l_radial * sin(270.0)	h_radial	rad
+GW	23	nsegs_radial	0	0	h_radial	0 + l_radial * cos(292.5)	0 + l_radial * sin(292.5)	h_radial	rad
+GW	24	nsegs_radial	0	0	h_radial	0 + l_radial * cos(315.0)	0 + l_radial * sin(315.0)	h_radial	rad
+GW	25	nsegs_radial	0	0	h_radial	0 + l_radial * cos(337.5)	0 + l_radial * sin(337.5)	h_radial	rad
+GS	0	0	1
 GE	1
 LD	5	1	1	1	58000000
 LD	5	2	1	1	58000000
@@ -48,11 +47,11 @@ LD	5	6	1	nsegs_el	58000000
 LD	5	7	1	nsegs_el	58000000
 LD	5	8	1	nsegs_el	58000000
 LD	5	9	1	nsegs_el	58000000
-LD	5	10	1	nsegs_el	58000000
-LD	5	11	1	1	58000000
-LD	5	12	1	1	58000000
-LD	5	13	1	1	58000000
-LD	5	14	1	1	58000000
+LD	5	10	1	nsegs_radial	58000000
+LD	5	11	1	nsegs_radial	58000000
+LD	5	12	1	nsegs_radial	58000000
+LD	5	13	1	nsegs_radial	58000000
+LD	5	14	1	nsegs_radial	58000000
 LD	5	15	1	nsegs_radial	58000000
 LD	5	16	1	nsegs_radial	58000000
 LD	5	17	1	nsegs_radial	58000000
@@ -64,13 +63,8 @@ LD	5	22	1	nsegs_radial	58000000
 LD	5	23	1	nsegs_radial	58000000
 LD	5	24	1	nsegs_radial	58000000
 LD	5	25	1	nsegs_radial	58000000
-LD	5	26	1	nsegs_radial	58000000
-LD	5	27	1	nsegs_radial	58000000
-LD	5	28	1	nsegs_radial	58000000
-LD	5	29	1	nsegs_radial	58000000
-LD	5	30	1	nsegs_radial	58000000
 GN	2	0	0	0	13	0.005
 EK
-EX	0	1	1	0	0	0	0
+EX	0	1	1	0	0
 FR	0	0	0	0	7.15	0
 EN
