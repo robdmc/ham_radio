@@ -1,0 +1,26 @@
+CM 
+CE
+SY lam=44.5
+SY h=.25 * lam
+SY s= .1 * lam
+SY xb=s*cos(30)
+SY yb=s/2
+SY xc=0
+SY yc=s
+SY nsegs=13
+SY phi_b=-78
+SY phi_c=0
+GW	1	nsegs	0	0	0	0	0	h	#14
+GW	2	nsegs	xb	yb	0	xb	yb	h	#14
+GW	3	nsegs	xc	yc	0	xc	yc	h	#14
+GE	1
+LD	5	1	1	nsegs	58000000
+LD	5	2	1	nsegs	58000000
+LD	5	3	1	nsegs	58000000
+GN	2	0	0	0	17	0.015
+EK
+EX	0	1	1	0	1	0	0
+EX	0	2	1	0	cos(phi_b)	sin(phi_b)	0
+EX	0	3	1	0	cos(phi_c)	sin(phi_c)	0
+FR	0	0	0	0	7.15	0
+EN
