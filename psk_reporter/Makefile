@@ -7,7 +7,7 @@ help:  ## Print the help documentation
 
 .PHONY: tunnel_jupyter 
 tunnel_jupyter: ## Open jupyter tunnel (run from mac)
-	ssh -L9999:localhost:9999 airflow
+	ssh -L9999:localhost:9999 root@dorob
 
 .PHONY: jupyter 
 jupyter: ## Run jupyter
@@ -15,6 +15,6 @@ jupyter: ## Run jupyter
 
 .PHONY: ssh
 ssh: ## SSH into the airflow compute engine
-	ssh rob@dorob
+	ssh root@dorob
 
 
